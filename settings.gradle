@@ -1,0 +1,2 @@
+rootProject.name='IMDB - Browse,Rate and Review Movies'
+include ':app'
