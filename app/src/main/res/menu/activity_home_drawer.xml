@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_movies"
+            android:checked="true"
+            android:icon="@drawable/ic_movie_white_24dp"
+            android:title="Movies"
+            app:showAsAction="ifRoom" />
+
+        <item
+            android:id="@+id/drawer_tv_shows"
+            android:icon="@drawable/ic_tv_white_24dp"
+            android:title="TV Shows"
+            app:showAsAction="ifRoom" />
+
+    </group>
+
+    <item android:title="Your Lists">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/drawer_favorites"
+                    android:icon="@drawable/ic_favorite_white_24dp"
+                    android:title="Favourites"
+                    app:showAsAction="ifRoom" />
+
+                <item
+                    android:id="@+id/drawer_watchlist"
+                    android:icon="@drawable/ic_watchlist_white_24dp"
+                    android:title="Watchlist"
+                    app:showAsAction="ifRoom" />
+
+                <item
+                    android:id="@+id/drawer_rated"
+                    android:icon="@drawable/ic_star_white_24dp"
+                    android:title="Rated"
+                    app:showAsAction="ifRoom" />
+            </group>
+        </menu>
+    </item>
+</menu>
