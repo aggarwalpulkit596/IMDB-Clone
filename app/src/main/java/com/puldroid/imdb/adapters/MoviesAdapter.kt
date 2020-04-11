@@ -14,7 +14,8 @@ import com.puldroid.imdb.utils.Constants
 import kotlinx.android.synthetic.main.item_large.view.*
 import java.util.*
 
-class MoviesAdapter(private val viewType: Int = 1) :
+const val MOVIE_BIG = 1
+class MoviesAdapter(private val viewType: Int) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var data: List<Movies> = ArrayList()
@@ -26,11 +27,11 @@ class MoviesAdapter(private val viewType: Int = 1) :
         }
 
         return when (viewType) {
-            1 -> MovieBigViewHolder(
+            MOVIE_BIG -> MovieBigViewHolder(
                 LayoutInflater.from(parent.context).inflate(R.layout.item_large, parent, false)
             )
             else -> MovieSmallViewHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_large, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.item_small, parent, false)
             )
         }
     }
@@ -81,11 +82,22 @@ class MoviesAdapter(private val viewType: Int = 1) :
     }
 
     class MovieSmallViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        init {
+            with(itemView){
+                moviePosterImageView.layoutParams.width = (context.resources.displayMetrics.widthPixels * 0.31).toInt()
+                moviePosterImageView.layoutParams.height =  ((context.resources.displayMetrics.widthPixels * 0.31) / 0.66).toInt()
+            }
+
+        }
         fun bind(movie: Movies) = with(itemView) {
             Glide.with(context).load(Constants.IMAGE_LOADING_BASE_URL_780 + movie.backdropPath)
                 .centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(moviePosterImageView)
+
+            movieTitleTextView.text = movie.title
+
         }
 
     }
