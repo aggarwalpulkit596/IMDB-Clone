@@ -1,4 +1,4 @@
-package com.puldroid.imdb.movies
+package com.puldroid.imdb.tvshows
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,7 +17,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MoviesFragment : Fragment() {
+class TvShowsFragment : Fragment() {
 
     private val moviesAdapter = MoviesAdapter(MOVIE_BIG)
     private val mPopularAdapter = MoviesAdapter(0)
@@ -63,7 +63,7 @@ class MoviesFragment : Fragment() {
 
     private fun setUpTopRated() {
         GlobalScope.launch(Dispatchers.Main) {
-            val response = withContext(Dispatchers.IO) { ApiClient.service.getTopRatedMovies(1) }
+            val response = withContext(Dispatchers.IO) { ApiClient.service.getTopRatedSeries() }
             if (response.isSuccessful) {
                 response.body()?.let { movieResponse ->
                     mTopRatedAdapter.swapData(movieResponse.results)
@@ -74,7 +74,7 @@ class MoviesFragment : Fragment() {
 
     private fun setUpUpcoming() {
         GlobalScope.launch(Dispatchers.Main) {
-            val response = withContext(Dispatchers.IO) { ApiClient.service.getUpcomingMovies(1) }
+            val response = withContext(Dispatchers.IO) { ApiClient.service.getOnTheAirSeries() }
             if (response.isSuccessful) {
                 response.body()?.let { movieResponse ->
                     mUpcomingAdapter.swapData(movieResponse.results)
@@ -85,7 +85,7 @@ class MoviesFragment : Fragment() {
 
     private fun setUpPopular() {
         GlobalScope.launch(Dispatchers.Main) {
-            val response = withContext(Dispatchers.IO) { ApiClient.service.getPopularMovies(1) }
+            val response = withContext(Dispatchers.IO) { ApiClient.service.getPopularSeries() }
             if (response.isSuccessful) {
                 response.body()?.let { movieResponse ->
                     mPopularAdapter.swapData(movieResponse.results)
@@ -96,7 +96,7 @@ class MoviesFragment : Fragment() {
 
     private fun setUpNowShowing() {
         GlobalScope.launch(Dispatchers.Main) {
-            val response = withContext(Dispatchers.IO) { ApiClient.service.getNowPlayingMovies(1) }
+            val response = withContext(Dispatchers.IO) { ApiClient.service.getAiringTodayTVShows() }
             if (response.isSuccessful) {
                 response.body()?.let { movieResponse ->
                     moviesAdapter.swapData(movieResponse.results)
